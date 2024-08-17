@@ -6,6 +6,32 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div id="sideBar">
+        <p>ToDo-les</p>
+        <div id="projectList"></div>
+        <button id="newProjectBtn">New List</button>
+    </div>
+
+    <div id="dashBoard">
+        <p id="projectTitle">Project Name</p>
+        <div id="todoList">
+        </div>
+
+        <!-- ADD NEW PROJECT FORM -->
+        <dialog id="newProjectDialog">
+            <form id="newProjectDiv" onsubmit="return false">
+                <label>
+                    Give your new Project a Title: 
+                    <input type="text" id="title" required>
+                </label>
+
+                <div class="newProjectButtons">
+                    <button id="cancelBtn">Cancel</button>
+                    <button class="confirmBtn" type="submit">Confirm</button>
+                </div>
+            </form>
+        </dialog>
+    </div>
+
 </body>
 </html>
