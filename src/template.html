@@ -7,31 +7,49 @@
 </head>
 <body>
     <div id="sideBar">
-        <p>ToDo-les</p>
+        <p>ToDos</p>
         <div id="projectList"></div>
-        <button id="newProjectBtn">New List</button>
+        <button class="addBtn newProject">New List</button>
     </div>
 
     <div id="dashBoard">
-        <p id="projectTitle">Project Name</p>
-        <div id="todoList">
+        <div id="projectHeader">
+            <p id="projectTitle">Project Name</p>
+            <button class="addBtn newItem">New Item</button>
         </div>
+        <div id="todoList"></div>
 
         <!-- ADD NEW PROJECT FORM -->
         <dialog id="newProjectDialog">
             <form id="newProjectDiv" onsubmit="return false">
-                <label>
-                    Give your new Project a Title: 
-                    <input type="text" id="title" required>
-                </label>
+                <label>Give your Project a Title:</label>
+                <input type="text" id="titleProject" required>
 
                 <div class="newProjectButtons">
-                    <button id="cancelBtn">Cancel</button>
-                    <button class="confirmBtn" type="submit">Confirm</button>
+                    <button class="cancelBtn newProject">Cancel</button>
+                    <button id="confirmBtn" type="submit">Confirm</button>
+                </div>
+            </form>
+        </dialog>
+
+        <!-- ADD NEW ITEM FORM -->
+        <dialog id="newItemDialog">
+            <form id="newItemDiv" onsubmit="return false">
+                <label>Item Name:</label>
+                <input type="text" id="titleItem" required>
+
+                <label>Item Due Date:</label>
+                <input type="text" id="dueDate" required>
+
+                <label>Item Priority:</label>
+                <input type="text" id="priority" required>
+
+                <div class="newItemButtons">
+                    <button class="cancelBtn newItem">Cancel</button>
+                    <button id="confirmBtn newItem" type="submit">Confirm</button>
                 </div>
             </form>
         </dialog>
     </div>
-
 </body>
 </html>

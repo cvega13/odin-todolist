@@ -9,10 +9,19 @@ import { Manager } from "./Manager";
 export class ProjectManager extends Manager {
     constructor() {
         super();
-        this.currentIndex = 0;
     }
 
     get currentProject() {
-        return this.items[this.currentIndex];
+        return this.items.at(-1);
     }
+
+    set currentProject(project) {
+        this.addItem(this.items.splice(this.items.indexOf(project), 1)[0]);
+    }
+
+    deleteProject(project) {
+        return this.items.splice(this.items.indexOf(project), 1);
+    }
+
+
 }
