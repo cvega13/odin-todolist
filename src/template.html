@@ -7,9 +7,9 @@
 </head>
 <body>
     <div id="sideBar">
-        <p>ToDos</p>
+        <p>Projects</p>
         <div id="projectList"></div>
-        <button class="addBtn newProject">New List</button>
+        <button class="addBtn newProject">New Project</button>
     </div>
 
     <div id="dashBoard">
@@ -17,7 +17,7 @@
             <p id="projectTitle">Project Name</p>
             <button class="addBtn newItem">New Item</button>
         </div>
-        <div id="todoList"></div>
+        <div id="itemList"></div>
 
         <!-- ADD NEW PROJECT FORM -->
         <dialog id="newProjectDialog">
@@ -27,7 +27,7 @@
 
                 <div class="newProjectButtons">
                     <button class="cancelBtn newProject">Cancel</button>
-                    <button id="confirmBtn" type="submit">Confirm</button>
+                    <button class="confirmBtn" type="submit">Confirm</button>
                 </div>
             </form>
         </dialog>
@@ -39,14 +39,25 @@
                 <input type="text" id="titleItem" required>
 
                 <label>Item Due Date:</label>
-                <input type="text" id="dueDate" required>
+                <input type="date" id="dueDate" required>
 
                 <label>Item Priority:</label>
-                <input type="text" id="priority" required>
+                <label class="radio" for="low">
+                    <input type="radio" id="low" name="priority" value="Low" required>
+                    Low
+                </label>
+                <label class="radio" for="medium">
+                    <input type="radio" id="medium" name="priority" value="Medium" required>
+                    Medium
+                </label>
+                <label class="radio" for="high">
+                    <input type="radio" id="high" name="priority" value="High" required>
+                    High
+                </label>
 
                 <div class="newItemButtons">
                     <button class="cancelBtn newItem">Cancel</button>
-                    <button id="confirmBtn newItem" type="submit">Confirm</button>
+                    <button class="confirmBtn" type="submit">Confirm</button>
                 </div>
             </form>
         </dialog>

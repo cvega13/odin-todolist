@@ -1,47 +1,11 @@
 import { ProjectManager } from "./ProjectManager.js";
+import { renderProjects, renderCurrentProject } from "./RenderController.js";
 import "./styles.css";
 const Project = require("./Project.js").Project;
 const ProjectItem = require("./ProjectItem.js").ProjectItem;
 
 
 let projects = new ProjectManager();
-
-// Render projects in sidebar
-function renderProjects() {
-    const projectList = document.querySelector("#projectList");
-    projectList.textContent = '';
-
-    projects.items.forEach(function (item) {
-        const newProject = document.createElement("p");
-        newProject.textContent = item.title;
-        
-        // Adds functionality to switch current project
-        newProject.addEventListener("click", (e) => {
-            projects.currentProject = item;
-            renderProjects();
-            renderCurrentProject();
-        })
-        projectList.insertBefore(newProject, projectList.firstChild);
-    });
-}
-
-// Render items in current project
-function renderCurrentProject() {
-    const items = document.querySelector("#todoList");
-    const title = document.querySelector("#projectTitle");
-    items.textContent = ''
-
-    if (projects.currentProject.items == undefined) return;
-
-    title.textContent = projects.currentProject.title;
-    projects.currentProject.items.forEach(function (item) {
-        const newItem = document.createElement("div");
-        newItem.textContent = item.title;
-        items.appendChild(newItem);
-    });
-}
-    
-
 
 function FormController() {
     const projectDialog = document.querySelector("#newProjectDialog");
@@ -78,12 +42,12 @@ function FormController() {
 
     // Adds new Project to List
     function projectFormSubmitHandler() {
-        const title = document.querySelector("#title").value;
+        const title = document.querySelector("#titleProject").value;
     
         const newProject = new Project(title);
         projects.addItem(newProject);
-        renderProjects();
-        renderCurrentProject();
+        renderProjects(projects);
+        renderCurrentProject(projects);
 
         projectDialog.close()
         projectForm.reset();
@@ -94,11 +58,11 @@ function FormController() {
     function itemFormSubmitHandler() {
         const title = document.querySelector("#titleItem").value;
         const dueDate = document.querySelector("#dueDate").value;
-        const priority = document.querySelector("#priority").value;
+        const priority = document.querySelector('input[name="priority"]:checked').value;
 
         const newItem = new ProjectItem(title, dueDate, priority);
         projects.currentProject.addItem(newItem);
-        renderCurrentProject();
+        renderCurrentProject(projects);
 
         itemDialog.close();
         itemForm.reset();
@@ -109,25 +73,20 @@ FormController();
 
 
 
-
-
-
-
-
 // Initializes default project
 function defaultProject() {
-    const defaultProject = new Project("default project");
+    const defaultProject = new Project("Default Project");
 
-    const defaultItemOne = new ProjectItem("default item 1", "8/17/2024", "Medium");
-    const defaultItemTwo = new ProjectItem("default item 2", "8/17/2024", "Medium");
-    const defaultItemThree = new ProjectItem("default item 3", "8/17/2024", "Medium");
+    const defaultItemOne = new ProjectItem("Buy new sandals", new Date(2024, 5, 17), "Low");
+    const defaultItemTwo = new ProjectItem("Wedding Anniversary", new Date(2024, 12, 14), "High");
+    const defaultItemThree = new ProjectItem("Send Mail", new Date(2024, 3, 8), "Medium");
     defaultProject.addItem(defaultItemOne);
     defaultProject.addItem(defaultItemTwo);
     defaultProject.addItem(defaultItemThree);
 
     projects.addItem(defaultProject);
-    renderProjects();
-    renderCurrentProject();
+    renderProjects(projects);
+    renderCurrentProject(projects);
 }
 defaultProject();
 
