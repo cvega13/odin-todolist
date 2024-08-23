@@ -4,11 +4,10 @@ ProjectItem.js
 */
 
 export class ProjectItem {
-    constructor(title, dueDate, priority, description="", notes="") {
+    constructor(title, dueDate, priority, notes="") {
         this.title = title;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.description = description;
         this.notes = notes;
     }
 }

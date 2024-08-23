@@ -13,6 +13,10 @@ export class Manager {
     addItem(newItem) {
         this.items.push(newItem);
     }
+
+    deleteItem(index) {
+        return this.items.splice(index, 1);
+    }
 }
 
 

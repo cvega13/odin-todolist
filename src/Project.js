@@ -10,6 +10,5 @@ export class Project extends Manager {
     constructor(title) {
         super();
         this.title = title;
-        this.index = 0;
     }
 }

@@ -7,12 +7,25 @@ const ProjectItem = require("./ProjectItem.js").ProjectItem;
 
 let projects = new ProjectManager();
 
+
+function deleteItemHandler() {
+    const itemDivs = document.querySelectorAll("#itemList>div");
+    const deleteItem = document.querySelector(".deleteBtn");
+
+    itemDivs.forEach(function(div) {
+        div.addEventListener("click", () => {
+            deleteItem.setAttribute("index", div.getAttribute("index"));
+        })
+    })
+}
+
 function FormController() {
     const projectDialog = document.querySelector("#newProjectDialog");
     const itemDialog = document.querySelector("#newItemDialog");
+    const itemDetailDialog = document.querySelector("#itemDetailDialog");
     const projectForm = document.querySelector("#newProjectDiv");
     const itemForm = document.querySelector("#newItemDiv");
-    
+
     // Opens form to add new Project/Item
     const addButtons = document.querySelectorAll(".addBtn");
     addButtons.forEach(button => {
@@ -33,10 +46,21 @@ function FormController() {
 
             if (e.target.classList.contains('newProject')) {
                 projectDialog.close();
-            } else {
+            } else if (e.target.classList.contains('newItem')) {
                 itemDialog.close();
+            } else {
+                itemDetailDialog.close();
             }
         })
+    })
+
+    const deleteItem = document.querySelector(".deleteBtn");
+    deleteItem.addEventListener("click", () => {
+        const itemDetails = document.querySelector("#itemDetailDialog");
+        itemDetails.close()
+        projects.currentProject.deleteItem(deleteItem.getAttribute("index"));
+        renderCurrentProject(projects);
+        deleteItemHandler()
     })
 
 
@@ -48,6 +72,7 @@ function FormController() {
         projects.addItem(newProject);
         renderProjects(projects);
         renderCurrentProject(projects);
+        deleteItemHandler();
 
         projectDialog.close()
         projectForm.reset();
@@ -63,6 +88,7 @@ function FormController() {
         const newItem = new ProjectItem(title, dueDate, priority);
         projects.currentProject.addItem(newItem);
         renderCurrentProject(projects);
+        deleteItemHandler()
 
         itemDialog.close();
         itemForm.reset();
@@ -77,16 +103,19 @@ FormController();
 function defaultProject() {
     const defaultProject = new Project("Default Project");
 
-    const defaultItemOne = new ProjectItem("Buy new sandals", new Date(2024, 5, 17), "Low");
+    const defaultItemOne = new ProjectItem("Buy new sandals", new Date(2024, 5, 17), "Low", "yo");
     const defaultItemTwo = new ProjectItem("Wedding Anniversary", new Date(2024, 12, 14), "High");
     const defaultItemThree = new ProjectItem("Send Mail", new Date(2024, 3, 8), "Medium");
+    const defaultItemFour = new ProjectItem("Test Project", new Date(2024, 6, 22), "High");
     defaultProject.addItem(defaultItemOne);
     defaultProject.addItem(defaultItemTwo);
     defaultProject.addItem(defaultItemThree);
+    defaultProject.addItem(defaultItemFour);
 
     projects.addItem(defaultProject);
     renderProjects(projects);
     renderCurrentProject(projects);
+    deleteItemHandler();
 }
 defaultProject();
 

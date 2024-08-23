@@ -23,14 +23,30 @@ export function renderProjects(projects) {
 export function renderCurrentProject(projects) {
     const items = document.querySelector("#itemList");
     const title = document.querySelector("#projectTitle");
-    items.textContent = ''
+    items.textContent = '';
 
-    if (projects.currentProject.items == undefined) return;
+    if (projects.currentProject == undefined) return;
 
     title.textContent = projects.currentProject.title;
     projects.currentProject.items.forEach(function (item) {
         const newItem = document.createElement("div");
         newItem.classList.add("itemDiv");
+
+        newItem.addEventListener("click", (e) => {
+            const itemDetails = document.querySelector("#itemDetailDialog");
+            itemDetails.setAttribute("index", projects.currentProject.items.indexOf(item));
+
+            const itemTitle = document.querySelector("#itemTitle");
+            itemTitle.textContent = item.title;
+            const itemDueDate = document.querySelector("#itemDueDate");
+            itemDueDate.textContent = "Due: " + format(addDays(item.dueDate, 1), "MM/dd/yyyy");
+            const itemPriority = document.querySelector("#itemPriority");
+            itemPriority.textContent = "Priority: " + item.priority;
+            const itemNotes = document.querySelector("#itemNotes");
+            itemNotes.textContent = "Notes: " + item.notes;
+
+            itemDetails.showModal()
+        })
 
 
         const itemTitle = document.createElement("p");
