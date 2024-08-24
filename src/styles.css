@@ -115,8 +115,12 @@ body {
     align-self: end;   
 }
 
-#titleProject, #titleItem, #dueDate, #priority {
+#titleProject, #titleItem, #dueDate, #priority, #notes {
     font-size: 1.5rem;
+}
+
+#notes {
+    height: 6rem;
 }
 
 .cancelBtn, .confirmBtn, .deleteBtn {

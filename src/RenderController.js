@@ -12,6 +12,7 @@ export function renderProjects(projects) {
         // Adds functionality to switch current project
         newProject.addEventListener("click", (e) => {
             projects.currentProject = item;
+            localStorage.setItem("projects", JSON.stringify(projects));
             renderProjects(projects);
             renderCurrentProject(projects);
         })
@@ -34,7 +35,7 @@ export function renderCurrentProject(projects) {
 
         newItem.addEventListener("click", (e) => {
             const itemDetails = document.querySelector("#itemDetailDialog");
-            itemDetails.setAttribute("index", projects.currentProject.items.indexOf(item));
+            newItem.setAttribute("index", projects.currentProject.items.indexOf(item));
 
             const itemTitle = document.querySelector("#itemTitle");
             itemTitle.textContent = item.title;
